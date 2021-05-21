@@ -20,6 +20,7 @@ sudo groupadd docker
 
 sudo usermod -aG docker $USER
 
+인스턴스를 리부팅 해주세요.
 
 sudo apt install python-pip
 
