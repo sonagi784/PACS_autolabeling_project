@@ -79,7 +79,6 @@ def submit_img():
     segments = slic(pathimage, n_segments = numSegments, sigma = 0.1)
     io.imsave('C:\\software_engin\\static\\images\\labelimage33.jpg', mark_boundaries(pathimage, segments, color=(0.1,0.5,0))) 
     return jsonify(result = "success", result2= data1)
-#마우스가 onmouseover 이고 onmousedown (좌클릭) 인 상태에서 onmousemove 시에 좌표들을 실시간으로 전송
 
 
 
