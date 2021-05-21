@@ -2,23 +2,37 @@ CVAT AWS 세팅 가이드
 
 < 환경 세팅 >
 sudo apt-get update
+
 sudo apt-get --no-install-recommends install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
 sudo apt-get update
+
 sudo apt-get --no-install-recommends install -y docker-ce docker-ce-cli containerd.io
 
+
 sudo groupadd docker
+
 sudo usermod -aG docker $USER
 
+
 sudo apt install python-pip
+
 sudo apt install python3-pip
+
 sudo apt install docker
+
 sudo apt install docker-compose
+
 pip install setuptools wheel
 
 
+
 git clone https://github.com/openvinotoolkit/cvat.git
+
 cd cvat
 
 vi docker-compose.override.yml
