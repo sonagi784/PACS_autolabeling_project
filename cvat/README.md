@@ -23,11 +23,11 @@ sudo apt install python-pip
 
 sudo apt install python3-pip
 
+pip install setuptools wheel
+
 sudo apt install docker
 
 sudo apt install docker-compose
-
-pip install setuptools wheel
 
 
 
