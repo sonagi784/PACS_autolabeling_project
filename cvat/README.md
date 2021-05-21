@@ -1,6 +1,8 @@
-CVAT AWS 세팅 가이드
+CVAT AWS 세팅 가이드 (AWS EC2 ubuntu 18.04, t2.medium 이상 (프리티어 사용 불가), 디스크 크기 30GiB
 
+---------------------------------------------------------
 < 환경 세팅 >
+
 sudo apt-get update
 
 sudo apt-get --no-install-recommends install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
@@ -38,7 +40,8 @@ cd cvat
 
 vi docker-compose.override.yml
 
--------------------
+###############################
+
 version: "3.3"
 
 services:
@@ -47,20 +50,26 @@ services:
       CVAT_HOST: 퍼블릭 IPv4 주소 or 퍼블릭 IPv4 DNS
     ports:
       - "8080:80"
+      
+#################################
 
-------------------------
+
+----------------------------------------------------------------------
+
+< docker-compose 실행 >
 
 sudo docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
+< superuser 생성 시 >
+
 sudo docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
 
+------------------------------------------------------------------------
 
-
-
+이미지가 바뀐 경우 (로컬에서 내가 직접 할 예정)
 ------------------------
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
 
-docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
-docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
 ----------------------------
