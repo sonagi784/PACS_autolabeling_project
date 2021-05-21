@@ -57,6 +57,11 @@ sudo docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
 
 
 
+
+
+
+
+
 ------------------------
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
 
