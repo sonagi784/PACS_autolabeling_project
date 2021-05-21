@@ -30,8 +30,9 @@ sudo apt install docker
 sudo apt install docker-compose
 
 
+git clone https://github.com/sonagi784/PACS_autolabeling_project.git
 
-git clone https://github.com/openvinotoolkit/cvat.git
+cd PACS_autolabeling_project
 
 cd cvat
 
