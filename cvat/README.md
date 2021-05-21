@@ -62,5 +62,10 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
 
 docker-compose up -d
 
+ubuntu )
 docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
+
+windows )
+winpty docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
+
 ----------------------------
