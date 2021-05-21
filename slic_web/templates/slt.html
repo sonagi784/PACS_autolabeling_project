@@ -1,0 +1,264 @@
+<!doctype html>
+
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <style>
+            .nav{
+                height : 70px;
+                border-bottom: 1px solid black;
+                display: flex;
+                align-items: center;
+            }
+
+            .nav-rigth-items {
+                display:flex;
+                margin-left:auto;
+
+            }
+
+            .nav-item {
+                margin-left : 10px;
+            }
+
+            .company-name {
+                margin-left : 20px;
+                font-weight : bold;
+            }
+
+            .title {
+                text-align :center;
+                font-size : 40px;
+                font-weight : bold;
+            }
+
+            .subtitle{
+                text-align :center;
+                font-size : 40px;
+                font-weight : 300;
+            }
+
+            .main{
+                width: 800px;
+                margin:0 auto;
+                margin-top : 60px;
+                
+            }
+            .images{
+                height: 100%;
+                text-align: center;
+            }
+            .images:before{
+                content: ""; display: inline-block;
+                width: 1px; height: 100%;
+                margin-right: 0; vertical-align: middle;
+            }
+            .image-item{
+                display: inline-block; vertical-align: middle;
+            }
+        </style>
+
+    </head>
+
+    <body>
+    
+    <p id="example">SLIC</p>
+
+    <form>
+        <input type = 'file' name = 'file' id = 'path'/>
+        <input type = 'submit' id = 'submitImg'/> 
+
+    <div class='nav'>
+        <div class='company-name'>
+            SLIC
+        </div>
+        <div class='nav-rigth-items'>
+        <div class = 'nav-item'>
+            메뉴1
+        </div>
+        <div class = 'nav-item'>메뉴2</div>
+        <div class = 'nav-item'>메뉴3</div>
+        <div class = 'nav-item'>
+            <input type='color' id='selectcolor' value = '#0000ff' name='selectcolor'>
+        </div>
+      </div>
+    </div>
+
+    <div class='main'>
+      <div class='title'>
+        SLIC
+      </div>
+      <div class='subtitle'>
+        
+      </div>
+    </div>
+
+    <div class="images">
+      <div class='image-item'>
+        {% if True %}
+        <img id = "practiceimg" src = 'static\\images\\labelimage22.jpg' onmousemove = "dragaction_coords(event,'/')"
+        onmousedown = 'downdown()'  onmouseup='upup()' ondragstart="return false"/>
+        {% endif %}
+        {% if True %}
+        <img id ='labelimg' src = 'static\\images\\sample2.jpg' />
+        {% endif %}
+      </div>   
+    </div>
+    
+    <p id = "imgcoordinates"></p>
+    
+    <form method="POST">
+        <input type = 'text' name = 'x_value'  id = 't1'>
+        <input type = 'text' name = 'y_value'  id = 't2'>
+    </form>
+
+    <script>
+        $('#submitImg').click(function(){
+            var postdata1 = {
+                'path' :  $('#path').val()
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '{{url_for("submit_img")}}',
+                data: JSON.stringify(postdata1),
+                dataType : 'JSON',
+                contentType: "application/json",
+                success: function(data){
+                    dtt = new Date();
+                    $('#practiceimg').attr('src','static\\images\\labelimage33.jpg'+'?'+dtt.getTime());
+                },
+                error: function(request, status, error){
+                    alert('submit_img 통신 실패')
+                    alert(error);
+                }
+            })
+        })
+
+        $('#practiceimg').click(function(event){
+
+            var x2 = event.offsetX;
+            var y2 = event.offsetY;
+
+            var postdata = {
+                'x_value' : x2,'y_value' : y2, 'selectcolor' : $('#selectcolor').val(), 'ur':'static\\images\\labelimage1.jpg'
+            }
+            $.ajax({
+                type: 'POST',
+                url: '{{url_for("ajax")}}',
+                data: JSON.stringify(postdata),
+                dataType : 'JSON',
+                contentType: "application/json",
+                success: function(data){
+                    dt = new Date();
+                    $('#labelimg').attr('src',data.postdata['ur']+'?'+dt.getTime());
+                },
+                error: function(request, status, error){
+                    alert('ajax 통신 실패')
+                    alert(error);
+                }
+            })
+        })
+        function getimg(){
+            $.ajax({
+                type:'GET',
+                cache:false,
+                url:"{{url_for('get_img')}}",
+                success:function(resp){
+                    dt = new Date();
+                    $('#labelimg').attr('src',resp.img1+'?'+dt.getTime());
+                }
+            })
+        }
+        $(document).ready(function(){
+            setInterval(getimg,1000);
+        });
+    </script>
+    <script>
+        var isDown = false  
+
+        function action_coords(event, path , method = 'post') {
+
+            var x2 = event.offsetX;
+            var y2 = event.offsetY;
+
+            var coords = "offsetX: " + x2 + ", offsetY: " + y2 + "<br/>";
+
+            document.getElementById('imgcoordinates').innerHTML = coords
+            document.getElementById('t1').value = x2
+            document.getElementById('t2').value = y2
+
+            params = {'x_value' : x2,'y_value' : y2, 'selectcolor' : document.getElementById('selectcolor').value}
+
+            const form = document.createElement('form');
+            form.method = method;
+            form.action = path;
+
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = key;
+                hiddenField.value = params[key];
+
+                form.appendChild(hiddenField);
+                }
+            }
+            document.body.appendChild(form);
+            form.submit();     
+        }
+
+        function dragaction_coords(event, path , method = 'post') {
+
+            if (isDown == true){
+
+                var x2 = event.offsetX;
+                var y2 = event.offsetY;
+
+                var coords = "offsetX: " + x2 + ", offsetY: " + y2 + "<br/>";
+
+                document.getElementById('imgcoordinates').innerHTML = coords
+                document.getElementById('t1').value = x2
+                document.getElementById('t2').value = y2
+
+                params = {'x_value' : x2,'y_value' : y2, 'selectcolor' : document.getElementById('selectcolor').value}
+
+                const form = document.createElement('form');
+                form.method = method;
+                form.action = path;
+
+                for (const key in params) {
+                    if (params.hasOwnProperty(key)) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = key;
+                    hiddenField.value = params[key];
+
+                    form.appendChild(hiddenField);
+                    }
+                }
+                document.body.appendChild(form);
+                form.submit();     
+            }
+
+        }
+        function downdown(){
+            isDown = true
+        }
+        function upup()
+        {
+            isDown=false
+        }
+
+    </script>
+
+
+    </body>
+
+</html>
+
+
+
