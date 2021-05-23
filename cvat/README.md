@@ -59,7 +59,7 @@ services:
 
 < docker-compose 실행 >
 
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+sudo docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
 sudo docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
