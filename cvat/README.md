@@ -22,15 +22,11 @@ sudo usermod -aG docker $USER
 
 인스턴스 reboot
 
-sudo apt install python-pip
-
-sudo apt install python3-pip
+sudo apt install python-pip python3-pip
 
 pip install setuptools wheel
 
-sudo apt install docker
-
-sudo apt install docker-compose
+sudo apt install docker docker-compose
 
 
 git clone https://github.com/sonagi784/PACS_autolabeling_project.git
