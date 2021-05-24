@@ -10,8 +10,8 @@ import numpy as np
 import cv2
 
 BASE_URL = 'C:/Users/jhdesk/folder/github/PACS_autolabeling_project/slic_web/'
-STATIC_URL = 'C:/Users/jhdesk/folder/github/PACS_autolabeling_project/slic_web/static/'
-MEDIA_URL = 'C:/Users/jhdesk/folder/github/PACS_autolabeling_project/slic_web/_media/'
+STATIC_URL = BASE_URL + 'static/'
+MEDIA_URL = BASE_URL + '_media/'
 
 clicked_points = set()
 clone = None
