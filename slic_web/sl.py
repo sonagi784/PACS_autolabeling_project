@@ -9,18 +9,22 @@ import argparse
 import numpy as np
 import cv2
 
+BASE_URL = 'C:/Users/jhdesk/folder/github/PACS_autolabeling_project/slic_web/'
+STATIC_URL = 'C:/Users/jhdesk/folder/github/PACS_autolabeling_project/slic_web/static/'
+MEDIA_URL = 'C:/Users/jhdesk/folder/github/PACS_autolabeling_project/slic_web/_media/'
+
 clicked_points = set()
 clone = None
 global image1
 
-image = cv2.imread('C:\\sample2.jpg')
+image = cv2.imread(BASE_URL + 'sample2.jpg')
 clone = image.copy()
 numSegments = 1000
 segments = slic(image, n_segments = numSegments, sigma = 0.1)
 color = (255,0,0)
 image1 = clone.copy()
 image2 = mark_boundaries(image, segments, color=(0.1,0.5,0))
-io.imsave('C:\\software_engin\\static\\images\\labelimage22.jpg', image2)    
+io.imsave(STATIC_URL + 'images/labelimage22.jpg', image2)    
 
 app = Flask(__name__)
 
@@ -38,12 +42,12 @@ def index():
             image1[segments	== segments[point[0], point[1]]] = color
         clicked_points.clear()
         # cv2.imshow("image123",image1)
-        cv2.imwrite('C:\\software_engin\\static\\images\\labelimage1.jpg', image1)
-        cv2.imwrite('C:\\imagestore\\labelimage11.jpg', image1)
+        cv2.imwrite(STATIC_URL + 'images/labelimage1.jpg', image1)
+        cv2.imwrite(MEDIA_URL + 'labelimage11.jpg', image1)
         return ('', 204)
 
 
-    return render_template('slt.html',image_file = "static\\images\\labelimage22.jpg", image_file2 = 'static\\images\\labelimage1.jpg')
+    return render_template('slt.html',image_file = "static/images/labelimage22.jpg", image_file2 = 'static/images/labelimage1.jpg')
     
 @app.route('/ajax', methods=['POST'])
 def ajax():
@@ -58,16 +62,16 @@ def ajax():
     for point in clicked_points:
         image1[segments	== segments[point[0], point[1]]] = color
     clicked_points.clear()
-    cv2.imwrite('C:\\software_engin\\static\\images\\labelimage1.jpg', image1)
-    cv2.imwrite('C:\\imagestore\\labelimage11.jpg', image1)
-    data['ur'] = 'static\\images\\labelimage1.jpg'
+    cv2.imwrite(STATIC_URL + 'images/labelimage1.jpg', image1)
+    cv2.imwrite(MEDIA_URL + 'labelimage11.jpg', image1)
+    data['ur'] = 'static/images/labelimage1.jpg'
     print(data)
 
     return jsonify(result = "success", result2= data)
 
 @app.route('/get_img',methods=['GET'])
 def get_img():
-    img = 'static\\images\\labelimage1.jpg'
+    img = 'static/images/labelimage1.jpg'
     return jsonify(img1 = img)
 
 @app.route('/submit_img',methods=['POST'])
@@ -77,7 +81,7 @@ def submit_img():
     pathimage = cv2.imread(data1['path'])
     numSegments = 5000
     segments = slic(pathimage, n_segments = numSegments, sigma = 0.1)
-    io.imsave('C:\\software_engin\\static\\images\\labelimage33.jpg', mark_boundaries(pathimage, segments, color=(0.1,0.5,0))) 
+    io.imsave(STATIC_URL + '/images/labelimage33.jpg', mark_boundaries(pathimage, segments, color=(0.1,0.5,0))) 
     return jsonify(result = "success", result2= data1)
 
 
@@ -91,7 +95,7 @@ def submit_img():
     #         cv2.imshow("image123",image1)
     #         clicked_points.clear()
     #     elif event == cv2.EVENT_RBUTTONDOWN :
-    #         cv2.imwrite('C:\\imagestore\\image123ee.jpg', image1)    
+    #         cv2.imwrite('C:/imagestore/image123ee.jpg', image1)    
         
     # cv2.imshow("Aaa",mark_boundaries(image, segments, color=(0.1,0.5,0)))
     # cv2.setMouseCallback("Aaa", MouseLeftClick)
@@ -121,11 +125,11 @@ if __name__ =='__main__':
 #         cv2.imshow("image123",image1)
 #         clicked_points.clear()
 #     elif event == cv2.EVENT_RBUTTONDOWN :
-#         cv2.imwrite('C:\\imagestore\\image123ee.jpg', image1)    
+#         cv2.imwrite('C:/imagestore/image123ee.jpg', image1)    
 
 
 
-# image = cv2.imread('C:\\sample2.jpg')
+# image = cv2.imread('C:/sample2.jpg')
 # clone = image.copy()
 
 # for numSegments in (1000, 5000):
