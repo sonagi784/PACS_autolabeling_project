@@ -10,7 +10,8 @@ const GITTER_URL = 'https://gitter.im/opencv-cvat';
 const GITTER_PUBLIC_URL = 'https://gitter.im/opencv-cvat/public';
 const FORUM_URL = 'https://software.intel.com/en-us/forums/intel-distribution-of-openvino-toolkit';
 const GITHUB_URL = 'https://github.com/openvinotoolkit/cvat';
-const SLIC_URL = 'http://ec2-3-34-183-68.ap-northeast-2.compute.amazonaws.com';
+const SLIC_URL = ''; // input SLIC URL
+const LABEL_URL = ''; // input LABEL URL
 const GITHUB_IMAGE_URL =
     'https://raw.githubusercontent.com/openvinotoolkit/cvat/develop/cvat/apps/documentation/static/documentation/images/cvat.jpg';
 const SHARE_MOUNT_GUIDE_URL =
@@ -34,6 +35,7 @@ export default {
     FORUM_URL,
     GITHUB_URL,
     SLIC_URL,
+    LABEL_URL,
     GITHUB_IMAGE_URL,
     SHARE_MOUNT_GUIDE_URL,
     CANVAS_BACKGROUND_COLORS,

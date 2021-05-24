@@ -148,7 +148,7 @@ function HeaderContainer(props: Props): JSX.Element {
     } = props;
 
     const {
-        CHANGELOG_URL, LICENSE_URL, GITTER_URL, FORUM_URL, GITHUB_URL, SLIC_URL,
+        CHANGELOG_URL, LICENSE_URL, GITTER_URL, FORUM_URL, GITHUB_URL, SLIC_URL, LABEL_URL,
     } = consts;
 
     const history = useHistory();
@@ -287,6 +287,17 @@ function HeaderContainer(props: Props): JSX.Element {
                     }}
                 >
                     Slic
+                </Button>
+                <Button
+                    className='cvat-header-button'
+                    type='link'
+                    href={LABEL_URL}
+                    onClick={(event: React.MouseEvent): void => {
+                        event.preventDefault();
+                        window.open(LABEL_URL, '_blank');
+                    }}
+                >
+                    Labeler
                 </Button>
 
                 {isModelsPluginActive && (

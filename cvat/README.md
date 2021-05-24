@@ -68,4 +68,10 @@ sudo docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
 
 
 
-잘 안될경우, 1) cvat의 원본파일을 다운받고 2).git, .github 을 삭제한 뒤 3)docker-compose up -d 로 원본이 실행되는지 확인하고 4) 원하는 파일을 직접 수정 5) docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build 6) docker-compose up -d 다시 실행
+잘 안될경우, 
+1) cvat의 원본파일을 다운받고 (git clone https://github.com/openvinotoolkit/cvat.git)
+2).git, .github 을 삭제한 뒤 
+3)docker-compose up -d 로 원본이 실행되는지 확인하고 
+4) 원하는 파일을 직접 수정 
+5) docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build 
+6) docker-compose up -d 다시 실행
