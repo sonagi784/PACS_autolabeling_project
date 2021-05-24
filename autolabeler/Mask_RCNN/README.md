@@ -1,1 +1,10 @@
+logs 폴더에 mask_rcnn_object_0010.h5 넣어주시고
+Maks_RCNN 폴더에 mask_rcnn_coco.h5 넣어주세요
+
+app.py
+Mask_RCNN/mrcnn/visualize.py
+위 두개 파일들안에 경로설정이 제 컴퓨터로 맞춰있어서 경로변경하시고 app.py 실행하시면 됩니다.
+![visualize 변경](https://user-images.githubusercontent.com/75662287/119297250-902dc600-bc95-11eb-8b7a-6bdc4d837e48.PNG)
+![app rootdir 변경](https://user-images.githubusercontent.com/75662287/119297269-96bc3d80-bc95-11eb-96b4-1bd7ab1a3c57.PNG)
+![app 추가dir 변경](https://user-images.githubusercontent.com/75662287/119297276-98860100-bc95-11eb-90bc-5d71c849f461.PNG)
 
