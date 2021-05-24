@@ -26,6 +26,8 @@ app.py
 ----
 !pip install tensorboard==1.15.0 tensorflow==1.15.0 tensorflow-estimator==1.15.1 tensorflow-gpu==1.15.2 tensorflow-gpu-estimator==2.1.0 Keras==2.2.5 Keras-Applications==1.0.8 Keras-Preprocessing==1.1.0
 
+mask rcnn 실행하려면 tensorflow 버전을 낮춰야해서 위에 버전으로 설정하시면 됩니다.
+
 
 
 
