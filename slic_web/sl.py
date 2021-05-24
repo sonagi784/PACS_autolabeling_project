@@ -17,14 +17,14 @@ clicked_points = set()
 clone = None
 global image1
 
-image = cv2.imread(BASE_URL + 'sample2.jpg')
+image = cv2.imread('sample2.jpg')
 clone = image.copy()
 numSegments = 1000
 segments = slic(image, n_segments = numSegments, sigma = 0.1)
 color = (255,0,0)
 image1 = clone.copy()
 image2 = mark_boundaries(image, segments, color=(0.1,0.5,0))
-io.imsave(STATIC_URL + 'images/labelimage22.jpg', image2)    
+io.imsave('static/images/labelimage22.jpg', image2)    
 
 app = Flask(__name__)
 
@@ -42,8 +42,8 @@ def index():
             image1[segments	== segments[point[0], point[1]]] = color
         clicked_points.clear()
         # cv2.imshow("image123",image1)
-        cv2.imwrite(STATIC_URL + 'images/labelimage1.jpg', image1)
-        cv2.imwrite(MEDIA_URL + 'labelimage11.jpg', image1)
+        cv2.imwrite('static/images/labelimage1.jpg', image1)
+        cv2.imwrite('_media/labelimage11.jpg', image1)
         return ('', 204)
 
 
@@ -62,8 +62,8 @@ def ajax():
     for point in clicked_points:
         image1[segments	== segments[point[0], point[1]]] = color
     clicked_points.clear()
-    cv2.imwrite(STATIC_URL + 'images/labelimage1.jpg', image1)
-    cv2.imwrite(MEDIA_URL + 'labelimage11.jpg', image1)
+    cv2.imwrite('static/images/labelimage1.jpg', image1)
+    cv2.imwrite('_media/labelimage11.jpg', image1)
     data['ur'] = 'static/images/labelimage1.jpg'
     print(data)
 
@@ -81,7 +81,7 @@ def submit_img():
     pathimage = cv2.imread(data1['path'])
     numSegments = 5000
     segments = slic(pathimage, n_segments = numSegments, sigma = 0.1)
-    io.imsave(STATIC_URL + '/images/labelimage33.jpg', mark_boundaries(pathimage, segments, color=(0.1,0.5,0))) 
+    io.imsave('static/images/labelimage33.jpg', mark_boundaries(pathimage, segments, color=(0.1,0.5,0))) 
     return jsonify(result = "success", result2= data1)
 
 
