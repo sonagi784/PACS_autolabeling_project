@@ -9,7 +9,7 @@ import argparse
 import numpy as np
 import cv2
 
-BASE_URL = 'C:/Users/jhdesk/folder/github/PACS_autolabeling_project/slic_web/'
+BASE_URL = '' # '~~/~~/~~/slic_web/' (absolute path)
 STATIC_URL = BASE_URL + 'static/'
 MEDIA_URL = BASE_URL + '_media/'
 
