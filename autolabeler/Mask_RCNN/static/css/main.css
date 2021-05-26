@@ -20,6 +20,9 @@ input[type="file"] {
   display: none;
 }
 
+input[type="submit"] {
+  display: none;
+}
 .upload-label {
   display: inline-block;
   padding: 12px 30px;
