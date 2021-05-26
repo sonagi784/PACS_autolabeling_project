@@ -58,13 +58,14 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 // Get and display the result
+                alert(response)
                 $('.loader').hide();
                 $('#result').fadeIn(600);
                 $('#result').text(' Result:  Background Removed!');
                 // Get and display the result
                 $('.result_img-section').show();
                 $("#myimg").show();
-                $("#myimg").attr('src', response);
+                $("#myimg").attr('src', response['msg']);
                 console.log('GET Success!');
             },
         });
