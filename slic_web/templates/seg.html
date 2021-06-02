@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <style>
+      .nav {
+        height: 70px;
+        border-bottom: 1px solid black;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-rigth-items {
+        display: flex;
+        margin-left: auto;
+      }
+
+      .nav-item {
+        margin-left: 10px;
+      }
+
+      .company-name {
+        margin-left: 20px;
+        font-weight: bold;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+      }
+
+      .subtitle {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 300;
+      }
+
+      .main {
+        width: 800px;
+        margin: 0 auto;
+        margin-top: 60px;
+      }
+      .images {
+        height: 100%;
+        text-align: center;
+      }
+      .images:before {
+        content: "";
+        display: inline-block;
+        width: 1px;
+        height: 100%;
+        margin-right: 0;
+        vertical-align: middle;
+      }
+      .image-item {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .store_button {
+        position: relative;
+        margin: 20px;
+        float: right;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: #f0f2f5">
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: #d8d8d8"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">SLIC</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button
+                    type="button"
+                    id="draw"
+                    name="draw"
+                    class="btn btn-primary btn-sm"
+                  >
+                    Draw
+                  </button>
+                  <button
+                    type="button"
+                    id="erase"
+                    name="erase"
+                    class="btn btn-primary btn-sm"
+                  >
+                    Erase
+                  </button>
+                </div>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">
+                <input
+                  type="color"
+                  id="selectcolor"
+                  value="#0000ff"
+                  name="selectcolor"
+              /></a>
+            </li>
+          </ul>
+          <form
+            action="/segmentation"
+            ="upload-file"
+            method="post"
+            enctype="multipart/form-data"
+            class="d-flex"
+          >
+            <input
+              type="file"
+              name="file_upload"
+              id="imageUpload"
+              accept=".png, .jpg, .jpeg, .mp4"
+              class="form-control me-2"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-primary btn-sm" type="submit">
+              Segmentation
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main">
+      <div class="title"></div>
+      <div class="subtitle"></div>
+    </div>
+
+    <div class="images">
+      <div class="image-item">
+        {% if True %}
+        <img
+          id="myimg12"
+          onmousemove="dragaction_coords(event,'/drag_draw')"
+          onmousedown="downdown()"
+          onmouseup="upup()"
+          ondragstart="return false"
+        />
+        {% endif%} {% if True %}
+        <img id="labelimg" />
+        {% endif %}
+      </div>
+    </div>
+    <form
+      action="/store_json"
+      method="post"
+      enctype="multipart/form-data"
+      class="row gx-3 gy-2 align-items-center"
+      style="margin: 20px; float: left; position: relative"
+    >
+      <div class="col-sm-3">
+        <label class="visually-hidden" for="specificSizeInputName">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="specificSizeInputName"
+          placeholder="Class"
+          name="class"
+        />
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Json</button>
+      </div>
+      <div class="col-auto">
+        <a href="../static/images/a1.jpg" download>
+          <input type="button" value="Store_Img" class="btn btn-primary" />
+        </a>
+      </div>
+      <div class="col-auto">
+        <input
+          type="button"
+          id="file_download"
+          value="Store_Info"
+          class="btn btn-primary"
+        />
+        <a id="download" download="" href=""></a>
+      </div>
+    </form>
+    <p id="imgcoordinates"></p>
+
+    <script>
+      function hi() {
+        $.ajax({
+          type: "GET",
+          cache: false,
+          url: "{{url_for('get_img')}}",
+          success: function (resp) {
+            $("#myimg12").attr(
+              "src",
+              "/static/images/" + resp.img1 + "?" + new Date().getTime()
+            );
+          },
+        });
+      }
+      var abc = {};
+      abc["aaa"] = "bbb";
+      var isDown = false;
+      var erase = false;
+      var url_ = '{{url_for("click_draw")}}';
+
+      $("#draw").click(function () {
+        erase = false;
+      });
+
+      $("#erase").click(function () {
+        erase = true;
+      });
+
+      function dragaction_coords(event, path, method = "post") {
+        if (erase == true) {
+          path = "/drag_erase";
+        } else {
+          path = "/drag_draw";
+        }
+        if (isDown == true) {
+          var x2 = event.offsetX;
+          var y2 = event.offsetY;
+
+          var coords = "offsetX: " + x2 + ", offsetY: " + y2 + "<br/>";
+
+          params = {
+            x_value: x2,
+            y_value: y2,
+            selectcolor: document.getElementById("selectcolor").value,
+          };
+
+          const form = document.createElement("form");
+          form.method = method;
+          form.action = path;
+
+          for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+              const hiddenField = document.createElement("input");
+              hiddenField.type = "hidden";
+              hiddenField.name = key;
+              hiddenField.value = params[key];
+
+              form.appendChild(hiddenField);
+            }
+          }
+          document.body.appendChild(form);
+          form.submit();
+        }
+      }
+      function downdown() {
+        isDown = true;
+      }
+      function upup() {
+        isDown = false;
+      }
+      $("#myimg12").click(function (event) {
+        if (erase == true) {
+          url_ = '{{url_for("click_erase")}}';
+        } else {
+          url_ = '{{url_for("click_draw")}}';
+        }
+
+        var x2 = event.offsetX;
+        var y2 = event.offsetY;
+
+        var postdata = {
+          x_value: x2,
+          y_value: y2,
+          selectcolor: $("#selectcolor").val(),
+        };
+        $.ajax({
+          type: "POST",
+          url: url_,
+          data: JSON.stringify(postdata),
+          dataType: "JSON",
+          contentType: "application/json",
+          success: function (data) {},
+          error: function (request, status, error) {
+            alert("ajax 통신 실패");
+            alert(error);
+          },
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      function getimg() {
+        $.ajax({
+          type: "GET",
+          cache: false,
+          url: "{{url_for('get_img')}}",
+          success: function (resp) {
+            $("#labelimg").attr(
+              "src",
+              "/static/images/a1.jpg" + "?" + new Date().getTime()
+            );
+          },
+        });
+      }
+      $(document).ready(function () {
+        hi();
+        getimg();
+        setInterval(getimg, 3000);
+      });
+      $("#file_download").on("click", function (e) {
+        $.ajax({
+          type: "POST",
+          url: "/jjjj",
+          data: JSON.stringify(abc),
+          dataType: "JSON",
+          contentType: "application/json",
+          success: function (data) {
+            alert(data.result2);
+            $("a#download")
+              .attr({
+                download: "download.json",
+                href:
+                  "data:application/json;charset=utf8;base64," +
+                  window.btoa(data.result2),
+              })
+              .get(0)
+              .click();
+          },
+          error: function (request, status, error) {
+            alert("ajax 통신 실패");
+            alert(error);
+          },
+        });
+      });
+    </script>
+  </body>
+  <footer></footer>
+</html>
