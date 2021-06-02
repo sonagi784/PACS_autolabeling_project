@@ -16,12 +16,12 @@
 jira
 
 https://sonagi784.atlassian.net/jira/software/projects/PACS/boards/1
-    
-     
-  
-                     
-   
- 
-  
- 
-      
+
+cvat)
+http://ec2-3-36-131-180.ap-northeast-2.compute.amazonaws.com/
+
+slic)
+http://ec2-3-34-183-68.ap-northeast-2.compute.amazonaws.com/
+
+autolabeler)
+http://ec2-3-37-55-55.ap-northeast-2.compute.amazonaws.com/
