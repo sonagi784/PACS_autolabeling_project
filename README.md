@@ -24,4 +24,4 @@ slic)
 http://ec2-3-34-183-68.ap-northeast-2.compute.amazonaws.com/
 
 autolabeler)
-http://ec2-3-37-55-55.ap-northeast-2.compute.amazonaws.com/
+http://ec2-3-37-55-55.ap-northeast-2.compute.amazonaws.com/  
