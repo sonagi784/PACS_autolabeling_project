@@ -13,15 +13,9 @@ app.py
 ![app rootdir 변경](https://user-images.githubusercontent.com/75662287/119297269-96bc3d80-bc95-11eb-96b4-1bd7ab1a3c57.PNG)
 ![app 추가dir 변경](https://user-images.githubusercontent.com/75662287/119297276-98860100-bc95-11eb-90bc-5d71c849f461.PNG)
 
-위 두개 파일들 경로변경하시고 app.py 실행하시면 됩니다...
+위 두개 파일들 경로변경하시고 app.py 실행하시면 됩니다.
 
-혹시 에러나면
-
-!pip install flask-ngrok
-
-!pip install gevent
-
-하면 되더라구요
+!pip install gevent <- 해주셔야합니다.
 
 ----
 !pip install tensorboard==1.15.0 tensorflow==1.15.0 tensorflow-estimator==1.15.1 tensorflow-gpu==1.15.2 tensorflow-gpu-estimator==2.1.0 Keras==2.2.5 Keras-Applications==1.0.8 Keras-Preprocessing==1.1.0
