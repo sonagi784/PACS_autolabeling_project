@@ -30,7 +30,7 @@ winpty docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
 -  크롬 브라우저를 열고 localhost:8080으로 들어가 로그인하여 사용합니다.
 
 
-## Build With 💕
+## Buil With 💕
 
 #### _Team_
 
