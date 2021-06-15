@@ -1,16 +1,19 @@
 
-## 동국대학교 캡스톤디자인 프로젝트 - PACS data autolabeling project  :bulb:
+## PACS data autolabeling project  :bulb:
 
 (( 유튜브 썸네일 및 링크 ))  
 
+- 2021 동국대학교 정보통신공학과 캡스톤디자인 프로젝트
 - 무료 및 웹페이지로 제공되는 통합 라벨링 서포트 시스템  
- - 수동 라벨링 및 오토 라벨링(prototype) 제공  
+- 수동 라벨링 및 오토 라벨링(prototype) 제공  
 
 
 ## Installation Guide  💻
 
+> 본 프로젝트는 chrome browser에 최적화되어 있습니다.  
+
 ### _<windows 10>_
-> 본 프로젝트는 chrome browser에 최적화되어 있습니다.
+
 -   Docker desktop, git, chrome을 설치합니다.
 
 - 소스코드를 clone 합니다. [GitHub repository](https://github.com/sonagi784/PACS_autolabeling_project).
