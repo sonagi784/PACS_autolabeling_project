@@ -12,7 +12,7 @@
 
 > 본 프로젝트는 chrome browser에 최적화되어 있습니다.  
 
-### _<windows 10>_
+### <_windows 10_>
 
 -   Docker desktop, git, chrome을 설치합니다.
 
@@ -21,8 +21,9 @@
 git clone https://github.com/sonagi784/PACS_autolabeling_project
 cd cvat
 ```
-- docker container를 실행합니다.
+- 이미지를 생성하고 docker container를 실행합니다.
 ```sh
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
 docker-compose up -d
 ```
 - 아래의 command로 슈퍼유저를 추가할 수 있습니다.
@@ -33,9 +34,9 @@ winpty docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
 -  크롬 브라우저를 열고 localhost:8080으로 들어가 로그인하여 사용합니다.
 
 
-## Buil With 💕
+## Built With 💕
 
-#### _Team_
+### <_Team_>
 
 👨 [김대형](https://github.com/ghkdnswl)  
 - 데이터 수집 및 보고  
@@ -49,7 +50,7 @@ winpty docker exec -it cvat bash -ic 'python3 ~/manage.py createsuperuser'
 👨 [이진수](https://github.com/ljs-ai)  
 - 라벨링 데이터 제작  
 
-#### _Mentorship_
+### <_Mentorship_>
 
 👴 [박은찬](https://kr.linkedin.com/in/%EC%9D%80%EC%B0%AC-%EB%B0%95-a9a65b146)  
 - 동국대학교 정보통신공학과 교수  
