@@ -1,5 +1,5 @@
 
-## PACS data autolabeling project 💡
+# PACS data autolabeling project 💡
 
 [![소개영상](https://img.youtube.com/vi/ToVcqdqfQKM/0.jpg)](https://youtu.be/ToVcqdqfQKM)  
 (YouTube)  
